@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Escola } from '../models/Escola';
 
 @Component({
@@ -9,17 +10,16 @@ import { Escola } from '../models/Escola';
 })
 export class EscolasComponent implements OnInit {
 
-  constructor(private ec: FormBuilder) { 
+  constructor(private ec: FormBuilder, private modalService: BsModalService) { 
     this.criarForm();
   }
 
   ngOnInit() {
   }
   public titulo = 'Escolas';
-
   public escolaSelecionada: Escola;
-
   public escolaForm: FormGroup;
+  modalRef: BsModalRef;
 
   public escolas = [
     {id: 1, cnpj: '00.456.455/0001-05', nome: 'Escola Pensi', endereco: 'Rua Iaco, n 137'},
@@ -46,6 +46,10 @@ export class EscolasComponent implements OnInit {
 
   escolaSubmit(){
     console.log(this.escolaForm.value);
+  }
+ 
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
 }

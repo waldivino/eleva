@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Turma } from '../models/Turma';
 
 @Component({
@@ -9,7 +10,7 @@ import { Turma } from '../models/Turma';
 })
 export class TurmasComponent implements OnInit {
 
-  constructor(private tc: FormBuilder) { 
+  constructor(private tc: FormBuilder, private modalService: BsModalService) { 
     this.criarForm();
   }
 
@@ -17,10 +18,9 @@ export class TurmasComponent implements OnInit {
   }
 
   public titulo = 'Turmas';
-
   public turmaSelecionada: Turma;
-
   public turmaForm: FormGroup;
+  modalRef: BsModalRef;
 
   public turmas = [
   {id: 1, escola: 'Pensi', turma:'P-101', periodo: 'manhã'},
@@ -48,6 +48,10 @@ export class TurmasComponent implements OnInit {
 
   turmaSubmit(){
     console.log(this.turmaForm.value);
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
 }
