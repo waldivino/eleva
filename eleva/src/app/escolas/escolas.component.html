@@ -1,0 +1,54 @@
+<h2>{{titulo}}</h2>
+
+<div class="row">
+  <div *ngIf="escolaSelecionada" class="col-sm-6">
+
+    <div class="row">
+      <div class="mr-auto">Atualiza dados da escola.</div>
+      <div class="mt-1"><button class="btn btn-default" (click)="limpar()">Fechar</button></div>
+    </div>
+  
+    <form [formGroup]="escolaForm" (submit)="escolaSubmit()">
+      <div class="form-group">
+        <label for="cnpj">CNPJ</label>
+        <input type="text" formControlName="cnpj" class="form-control" id="cnpj" aria-describedby="CNPJ">
+      </div>
+      <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" formControlName="nome" class="form-control" id="nome" aria-describedby="Nome">
+      </div>
+      <div class="form-group">
+        <label for="endereco">Endereço</label>
+        <input type="text" formControlName="endereco" class="form-control" id="endereco" aria-describedby="Endereço">
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!escolaForm.valid">Atualizar</button>
+    </form>
+  
+  </div>
+  
+  <div [ngClass]="{'col-sm-6': escolaSelecionada, 'col-sm-12': !escolaSelecionada}">
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">CNPJ</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Endereço</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let escola of escolas" style="cursor: pointer;">
+          <th scope="row">{{escola.id}}</th>
+          <td>{{escola.cnpj}}</td>
+          <td>{{escola.nome}}</td>
+          <td>{{escola.endereco}}</td>
+          <td>
+            <div class="btn-group"><button class="btn btn-outline-primary" (click)="escolaSelect(escola)">Editar</button></div>
+            <div class="btn-group"><button class="btn btn-danger">Excluir</button></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
