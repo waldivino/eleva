@@ -7,13 +7,15 @@ using api.models;
 
 namespace api.Data
 {
-    public class TurmaContext : DbContext
+    public class ElevaContext : DbContext
     {
-        public TurmaContext (DbContextOptions<TurmaContext> options)
+        public ElevaContext (DbContextOptions<ElevaContext> options)
             : base(options)
         {
         }
 
-        public DbSet<api.models.Turma> Turma { get; set; }
+        public DbSet<api.models.Escola> Escolas { get; set; }
+
+        public DbSet<api.models.Turma> Turmas { get; set; }
     }
 }

@@ -7,6 +7,10 @@
     "mssql2": {
       "type": "mssql",
       "connectionId": "TurmaContext"
+    },
+    "mssql3": {
+      "type": "mssql",
+      "connectionId": "ElevaContext"
     }
   }
 }

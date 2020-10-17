@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using api.Data;
 
+
 namespace api
 {
     public class Startup
@@ -28,11 +29,9 @@ namespace api
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddDbContext<EscolaContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("EscolaContext")));
+            services.AddDbContext<ElevaContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ElevaContext")));
 
-            services.AddDbContext<TurmaContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("TurmaContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +53,8 @@ namespace api
             }
 
             app.UseRouting();
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseEndpoints(endpoints =>
             {

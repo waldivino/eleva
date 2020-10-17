@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api.Data;
 
 namespace api.Migrations
 {
-    [DbContext(typeof(EscolaContext))]
-    [Migration("20201017132928_api")]
-    partial class api
+    [DbContext(typeof(ElevaContext))]
+    partial class ElevaContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,8 +21,10 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.models.Escola", b =>
                 {
-                    b.Property<decimal>("id")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("cnpj")
                         .HasColumnType("nvarchar(max)");
@@ -37,16 +37,18 @@ namespace api.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Escola");
+                    b.ToTable("Escolas");
                 });
 
             modelBuilder.Entity("api.models.Turma", b =>
                 {
-                    b.Property<decimal>("id")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal?>("escolaid")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int?>("escolaid")
+                        .HasColumnType("int");
 
                     b.Property<string>("periodo")
                         .HasColumnType("nvarchar(max)");
@@ -58,13 +60,13 @@ namespace api.Migrations
 
                     b.HasIndex("escolaid");
 
-                    b.ToTable("Turma");
+                    b.ToTable("Turmas");
                 });
 
             modelBuilder.Entity("api.models.Turma", b =>
                 {
                     b.HasOne("api.models.Escola", "escola")
-                        .WithMany("turmas")
+                        .WithMany("Turmas")
                         .HasForeignKey("escolaid");
                 });
 #pragma warning restore 612, 618

@@ -17,15 +17,15 @@ export class BaseService<TModelo> {
     return this.http.get<TModelo[]>(this.url);
   }
 
-  cadastrar(tModelo: TModelo): void {
-    this.http.post(this.url, tModelo);
+  post(tModelo: TModelo): Observable<TModelo>  {
+    return this.http.post<TModelo>(this.url, tModelo);
   }
 
-  atualizar(id: number, tModelo: TModelo): void {
-    this.http.put(this.url + id, tModelo);
+  put(id: number, tModelo: TModelo): Observable<TModelo>  {
+    return this.http.put<TModelo>(this.url + id, tModelo);
   }
 
-  deletar(id: number): void {
-    this.http.post(this.url, id);
+  delete(id: number): Observable<TModelo> {
+    return this.http.delete<TModelo>(this.url + id);
   }
 }

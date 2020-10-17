@@ -11,7 +11,7 @@ import { BaseService } from './Base.service';
 })
 export class EscolaService extends BaseService<Escola> {
   constructor(protected http: HttpClient) {
-    super(http, 'escola/');
+    super(http, 'escola');
   }
 
   listarTurmasPorEscola(id: number): Observable<Turma[]> {

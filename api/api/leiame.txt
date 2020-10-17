@@ -1,10 +1,4 @@
-﻿﻿Passo a passo do Identity
-1- Rodar no console do nuget (add-migration -c ApplicationDbContext api)
-2 - Rodar no console do nuget para remover as migrations (Remove-Migration -c ApplicationDbContext)
-3 - Para criar as bases ou atualizar (Update-Database -c ApplicationDbContext -Verbose)
-
-
-Passo a passo para criar e atualizar as classes modelos do banco
-1 - add-migration -c PersisteContext api
-2 - Update-Database -c PersisteContext -Verbose
-3 - Remove-Migration -c PersisteContext
+﻿Passo a passo para criar e atualizar as classes modelos do banco
+1 - add-migration -c ElevaContext api
+2 - Update-Database -c ElevaContext -Verbose
+3 - Remove-Migration -c ElevaContext

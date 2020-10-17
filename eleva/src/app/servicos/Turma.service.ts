@@ -8,6 +8,6 @@ import { BaseService } from './Base.service';
 })
 export class TurmaService extends BaseService<Turma> {
   constructor(protected http: HttpClient) {
-    super(http, 'turma/');
+    super(http, 'turma');
   }
 }

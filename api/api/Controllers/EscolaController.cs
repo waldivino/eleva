@@ -14,25 +14,26 @@ namespace api.Controllers
     [ApiController]
     public class EscolaController : ControllerBase
     {
-        private readonly EscolaContext _context;
+        private readonly ElevaContext _context;
 
-        public EscolaController(EscolaContext context)
+        public EscolaController(ElevaContext context)
         {
             _context = context;
         }
 
         // GET: api/Escola
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Escola>>> GetEscola()
+        public async Task<ActionResult<IEnumerable<Escola>>> GetEscolas()
         {
-            return await _context.Escola.ToListAsync();
+            return await _context.Escolas.ToListAsync();
+            //return await _context.Escolas.Include(t => t.Turmas).ToListAsync();
         }
 
         // GET: api/Escola/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Escola>> GetEscola(decimal id)
+        public async Task<ActionResult<Escola>> GetEscola(int id)
         {
-            var escola = await _context.Escola.FindAsync(id);
+            var escola = await _context.Escolas.FindAsync(id);
 
             if (escola == null)
             {
@@ -43,10 +44,8 @@ namespace api.Controllers
         }
 
         // PUT: api/Escola/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEscola(decimal id, Escola escola)
+        public async Task<IActionResult> PutEscola(int id, Escola escola)
         {
             if (id != escola.id)
             {
@@ -75,50 +74,34 @@ namespace api.Controllers
         }
 
         // POST: api/Escola
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Escola>> PostEscola(Escola escola)
         {
-            _context.Escola.Add(escola);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (EscolaExists(escola.id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            _context.Escolas.Add(escola);
+            await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetEscola", new { id = escola.id }, escola);
         }
 
         // DELETE: api/Escola/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Escola>> DeleteEscola(decimal id)
+        public async Task<ActionResult<Escola>> DeleteEscola(int id)
         {
-            var escola = await _context.Escola.FindAsync(id);
+            var escola = await _context.Escolas.FindAsync(id);
             if (escola == null)
             {
                 return NotFound();
             }
 
-            _context.Escola.Remove(escola);
+            _context.Escolas.Remove(escola);
             await _context.SaveChangesAsync();
 
             return escola;
         }
 
-        private bool EscolaExists(decimal id)
+        private bool EscolaExists(int id)
         {
-            return _context.Escola.Any(e => e.id == id);
+            return _context.Escolas.Any(e => e.id == id);
         }
     }
 }
