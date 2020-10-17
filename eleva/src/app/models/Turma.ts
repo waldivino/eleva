@@ -1,6 +1,9 @@
+import { Escola } from './Escola';
+
 export class Turma {
     id: Number;
-    escola: string;
+    escola: Escola;
     turma: string;
     periodo: string;
+
 }

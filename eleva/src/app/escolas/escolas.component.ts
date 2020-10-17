@@ -10,12 +10,6 @@ import { Escola } from '../models/Escola';
 })
 export class EscolasComponent implements OnInit {
 
-  constructor(private ec: FormBuilder, private modalService: BsModalService) { 
-    this.criarForm();
-  }
-
-  ngOnInit() {
-  }
   public titulo = 'Escolas';
   public escolaSelecionada: Escola;
   public escolaForm: FormGroup;
@@ -27,15 +21,26 @@ export class EscolasComponent implements OnInit {
     {id: 3, cnpj: '00.456.455/0001-03', nome: 'Escola Ideal', endereco: 'Rua Combú, n 227'},
   ];
 
+  constructor(private ec: FormBuilder, private modalService: BsModalService) {
+    this.criarForm();
+  }
+
+  // tslint:disable-next-line:typedef
+  ngOnInit() {
+  }
+
+  // tslint:disable-next-line:typedef
   escolaSelect(escola: Escola){
     this.escolaSelecionada = escola;
     this.escolaForm.patchValue(escola);
   }
 
+  // tslint:disable-next-line:typedef
   limpar(){
     this.escolaSelecionada = null;
   }
 
+  // tslint:disable-next-line:typedef
   criarForm(){
     this.escolaForm = this.ec.group({
       cnpj: ['', Validators.required],
@@ -44,10 +49,12 @@ export class EscolasComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line:typedef
   escolaSubmit(){
     console.log(this.escolaForm.value);
   }
- 
+
+  // tslint:disable-next-line:typedef
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
