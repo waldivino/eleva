@@ -13,7 +13,7 @@ namespace api.models
         public String cnpj { get; set; }
         public String nome { get; set; }
         public String endereco { get; set; }
-        public IList<Turma> Turmas { get; set; }
+        public IEnumerable<Turma> Turmas { get; set; } = new List<Turma>();
 
         public Escola()
         {

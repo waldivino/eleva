@@ -25,8 +25,11 @@ namespace api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Escola>>> GetEscolas()
         {
+            var escolas = (from e in _context.Escolas
+                        join t in _context.Turmas on e.id equals t.id select e).ToList();
+
+            //return await _context.Escolas.ToListAsync();
             return await _context.Escolas.ToListAsync();
-            //return await _context.Escolas.Include(t => t.Turmas).ToListAsync();
         }
 
         // GET: api/Escola/5
