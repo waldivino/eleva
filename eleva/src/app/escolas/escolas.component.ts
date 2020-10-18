@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Escola } from '../models/Escola';
+import { Turma } from '../models/Turma';
 import { EscolaService } from '../servicos/Escola.service';
 
 @Component({
@@ -28,6 +29,9 @@ export class EscolasComponent implements OnInit {
 
   // tslint:disable-next-line:member-ordering
   public escolas: Escola[];
+
+    // tslint:disable-next-line:member-ordering
+    public turmas: Turma[];
 
   // tslint:disable-next-line:typedef
   escolaSelect(escola: Escola){
@@ -136,6 +140,18 @@ export class EscolasComponent implements OnInit {
   // tslint:disable-next-line:typedef
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+
+  // tslint:disable-next-line:typedef
+  carregaTurmaPorEscola(escolaID: number){
+    this.escolaService.listarTurmasPorEscola(escolaID).subscribe(
+      (turmas: Turma[]) => {
+        this.turmas = turmas;
+      },
+      (erro: any) => {
+        console.error(erro);
+      }
+    );
   }
 
 }

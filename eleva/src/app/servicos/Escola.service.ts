@@ -14,7 +14,7 @@ export class EscolaService extends BaseService<Escola> {
     super(http, 'escola');
   }
 
-  listarTurmasPorEscola(id: number): Observable<Turma[]> {
-    return super.http.get<Turma[]>(super.url + id);
+  listarTurmasPorEscola(escolaId: number): Observable<Turma[]> {
+    return super.http.get<Turma[]>(super.url + escolaId);
   }
 }
