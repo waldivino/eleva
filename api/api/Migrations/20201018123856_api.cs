@@ -29,23 +29,23 @@ namespace api.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     turma = table.Column<string>(nullable: true),
                     periodo = table.Column<string>(nullable: true),
-                    escolaid = table.Column<int>(nullable: true)
+                    escolaId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Turmas", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Turmas_Escolas_escolaid",
-                        column: x => x.escolaid,
+                        name: "FK_Turmas_Escolas_escolaId",
+                        column: x => x.escolaId,
                         principalTable: "Escolas",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Turmas_escolaid",
+                name: "IX_Turmas_escolaId",
                 table: "Turmas",
-                column: "escolaid");
+                column: "escolaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
