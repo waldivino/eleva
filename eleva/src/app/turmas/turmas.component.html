@@ -24,8 +24,8 @@
           <td>{{turma.turma}}</td>
           <td>{{turma.periodo}}</td>
           <td>
-            <div class="btn-group"><button class="btn btn-outline-primary" (click)="turmaSelect(turma)" (click)="openModal(atualizar)" style="cursor: pointer;">Atualizar</button></div>
-            <div class="btn-group"><button class="btn btn-danger" style="cursor: pointer;">Excluir</button></div>
+            <div class="btn-group"><button class="btn btn-outline-primary" (click)="turmaSelect(turma)" (click)="openModal(atualizarTurma)" (click)="openModal(atualizarTurma)"  style="cursor: pointer;">Atualizar</button></div>
+            <div class="btn-group"><button class="btn btn-danger" style="cursor: pointer;" (click)="turmaSelect(turma)" (click)="deletarSubmit(turma)">Excluir</button></div>
           </td>
         </tr>
       </tbody>
@@ -61,7 +61,7 @@
   </div>
 </ng-template>
 
-<ng-template #atualizar>
+<ng-template #atualizarTurma>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Atualizar turma</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -70,7 +70,7 @@
   </div>
   <div class="modal-body">
 <div class="container">
-  <form [formGroup]="turmaForm" (submit)="turmaSubmit()">
+  <form [formGroup]="turmaForm" (submit)="atualizaSubmit()">
     <div class="form-group">
       <label for="escola">Escola</label>
       <input type="text" formControlName="escola" class="form-control" id="escola" aria-describedby="Escola">

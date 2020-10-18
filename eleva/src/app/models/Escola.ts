@@ -1,8 +1,7 @@
 import { Turma } from './Turma';
 
 export class Escola {
-    // tslint:disable-next-line:ban-types
-    id: Number;
+    id: number;
     cnpj: string;
     nome: string;
     endereco: string;

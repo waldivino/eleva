@@ -1,7 +1,7 @@
 import { Escola } from './Escola';
 
 export class Turma {
-    id: Number;
+    id: number;
     escola: Escola;
     turma: string;
     periodo: string;
