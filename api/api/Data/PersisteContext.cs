@@ -34,7 +34,6 @@ namespace TrampouApi.Context
                 turma.HasKey(t => t.id).HasName("id_turma");
                 turma.Property(t => t.turma).HasColumnName("nm_turma").ValueGeneratedOnAdd();
                 turma.Property(t => t.periodo).HasColumnName("periodo").HasMaxLength(25);
-                turma.HasOne(e => e.escola).WithMany(t => t.Turmas);
                 turma.Property(t => t.escolaId).HasColumnName("escolaid");
 
             });

@@ -9,7 +9,7 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ElevaContext))]
-    [Migration("20201018123856_api")]
+    [Migration("20201018132144_api")]
     partial class api
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,7 +66,7 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.models.Turma", b =>
                 {
-                    b.HasOne("api.models.Escola", "escola")
+                    b.HasOne("api.models.Escola", null)
                         .WithMany("Turmas")
                         .HasForeignKey("escolaId")
                         .OnDelete(DeleteBehavior.Cascade)

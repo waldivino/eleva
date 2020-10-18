@@ -11,7 +11,7 @@
       <thead class="thead-light">
         <tr>
           <th scope="col">ID</th>
-          <th scope="col">Escola</th>
+          <th scope="col">Escola ID</th>
           <th scope="col">Turma</th>
           <th scope="col">Período</th>
           <th scope="col"></th>
@@ -20,11 +20,11 @@
       <tbody>
         <tr *ngFor="let turma of turmas">
           <th scope="row">{{turma.id}}</th>
-          <td>{{turma.escola}}</td>
+          <td>{{turma.escolaId}}</td>
           <td>{{turma.turma}}</td>
           <td>{{turma.periodo}}</td>
           <td>
-            <div class="btn-group"><button class="btn btn-outline-primary" (click)="turmaSelect(turma)" (click)="openModal(atualizarTurma)" (click)="openModal(atualizarTurma)"  style="cursor: pointer;">Atualizar</button></div>
+            <div class="btn-group"><button class="btn btn-outline-primary" (click)="turmaSelect(turma)" (click)="openModal(atualizarTurma)"  style="cursor: pointer;">Atualizar</button></div>
             <div class="btn-group"><button class="btn btn-danger" style="cursor: pointer;" (click)="turmaSelect(turma)" (click)="deletarSubmit(turma)">Excluir</button></div>
           </td>
         </tr>
@@ -42,10 +42,15 @@
   </div>
   <div class="modal-body">
     <div class="container">
-      <form [formGroup]="turmaForm" (submit)="turmaSubmit()">
+      <form [formGroup]="turmaPostForm" (submit)="turmaSubmit()">
         <div class="form-group">
-          <label for="escola">Escola</label>
-          <input type="text" formControlName="escola" class="form-control" id="escola" aria-describedby="Escola">
+          <label for="escolaId">Escola</label>
+          <select class="form-control" aria-describedby="escolaId" id="escolaId" formControlName="escolaId">
+            <option value="">--Selecione uma Escola--</option>
+            <option *ngFor="let escola of escolas" value= {{escola.id}} formControlName="escolaId">
+              {{escola.nome}}
+            </option>
+         </select>
         </div>
         <div class="form-group">
           <label for="turma">Turma</label>
@@ -55,7 +60,7 @@
           <label for="periodo">Período</label>
           <input type="text" formControlName="periodo" class="form-control" id="periodo" aria-describedby="Periodo">
         </div>
-        <button type="submit" class="btn btn-primary" [disabled]="!turmaForm.valid">Cadastrar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!turmaPostForm.valid">Cadastrar</button>
       </form>
     </div>
   </div>
@@ -72,8 +77,8 @@
 <div class="container">
   <form [formGroup]="turmaForm" (submit)="atualizaSubmit()">
     <div class="form-group">
-      <label for="escola">Escola</label>
-      <input type="text" formControlName="escola" class="form-control" id="escola" aria-describedby="Escola">
+      <label for="escolaId">escolaId</label>
+      <input type="text" formControlName="escolaId" class="form-control" id="escolaId" aria-describedby="escolaId" disabled>
     </div>
     <div class="form-group">
       <label for="turma">Turma</label>

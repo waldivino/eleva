@@ -92,6 +92,8 @@ export class EscolasComponent implements OnInit {
       (escola: Escola) => {
         console.log(escola);
         this.carregaEscola();
+        this.escolaPostForm.reset();
+        this.escolaForm.reset();
       },
       (erro: any) => {
         console.error(erro);
@@ -107,6 +109,8 @@ export class EscolasComponent implements OnInit {
       (escola: Escola) => {
         console.log(escola);
         this.carregaEscola();
+        this.escolaPostForm.reset();
+        this.escolaForm.reset();
       },
       (erro: any) => {
         console.error(erro);

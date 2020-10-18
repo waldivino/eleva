@@ -1,7 +1,9 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Escola } from '../models/Escola';
 import { Turma } from '../models/Turma';
+import { EscolaService } from '../servicos/Escola.service';
 import { TurmaService } from '../servicos/Turma.service';
 
 @Component({
@@ -17,17 +19,21 @@ export class TurmasComponent implements OnInit {
   modalRef: BsModalRef;
   public turmaPostForm: FormGroup;
 
-  constructor(private tc: FormBuilder, private modalService: BsModalService, private turmaService: TurmaService) {
+  // tslint:disable-next-line:max-line-length
+  constructor(private tc: FormBuilder, private modalService: BsModalService, private turmaService: TurmaService, private escolaService: EscolaService) {
     this.criarForm();
   }
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
     this.carregaTurma();
+    this.carregaEscola();
   }
 
   // tslint:disable-next-line:member-ordering
   public turmas: Turma[];
+  // tslint:disable-next-line:member-ordering
+  public escolas: Escola[];
 
   // tslint:disable-next-line:typedef
   turmaSelect(turma: Turma){
@@ -45,16 +51,15 @@ export class TurmasComponent implements OnInit {
   criarForm(){
     this.turmaForm = this.tc.group({
       id: [''],
-      escola: ['', Validators.required],
       turma: ['', Validators.required],
-      periodo: ['', Validators.required]
+      periodo: ['', Validators.required],
+      escolaId: ['', Validators.required]
     });
 
     this.turmaPostForm = this.tc.group({
-      id: [''],
-      escola: ['', Validators.required],
       turma: ['', Validators.required],
-      periodo: ['', Validators.required]
+      periodo: ['', Validators.required],
+      escolaId: ['', Validators.required]
     });
   }
 
@@ -77,11 +82,13 @@ carregaTurma(){
 
 // tslint:disable-next-line:typedef
 turmaSubmit(){
+  this.turmaPostForm.value.escolaId = Number(this.turmaPostForm.value.escolaId);
   this.salvarTurma(this.turmaPostForm.value);
 }
 
 // tslint:disable-next-line:typedef
 atualizaSubmit(){
+  this.turmaPostForm.value.escolaId = Number(this.turmaPostForm.value.escolaId);
   this.atualizarTurma(this.turmaForm.value.id, this.turmaForm.value);
 }
 
@@ -97,6 +104,8 @@ salvarTurma(turma: Turma){
     (turma: Turma) => {
       console.log(turma);
       this.carregaTurma();
+      this.turmaPostForm.reset();
+      this.turmaForm.reset();
     },
     (erro: any) => {
       console.error(erro);
@@ -112,6 +121,8 @@ atualizarTurma(id: number, turma: Turma){
     (turma: Turma) => {
       console.log(turma);
       this.carregaTurma();
+      this.turmaForm.reset();
+      this.turmaPostForm.reset();
     },
     (erro: any) => {
       console.error(erro);
@@ -127,6 +138,18 @@ deletarTurma(id: number){
     (turma: Turma) => {
       console.log(turma);
       this.carregaTurma();
+    },
+    (erro: any) => {
+      console.error(erro);
+    }
+  );
+}
+
+// tslint:disable-next-line:typedef
+carregaEscola(){
+  this.escolaService.listar().subscribe(
+    (escolas: Escola[]) => {
+      this.escolas = escolas;
     },
     (erro: any) => {
       console.error(erro);

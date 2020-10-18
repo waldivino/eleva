@@ -12,7 +12,6 @@ namespace api.models
         public Int32 id { get; set; }
         public String turma { get; set; }
         public String periodo { get; set; }
-        public Escola escola { get; set; }
         public Int32 escolaId { get; set; }
 
         public Turma()

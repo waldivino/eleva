@@ -64,7 +64,7 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.models.Turma", b =>
                 {
-                    b.HasOne("api.models.Escola", "escola")
+                    b.HasOne("api.models.Escola", null)
                         .WithMany("Turmas")
                         .HasForeignKey("escolaId")
                         .OnDelete(DeleteBehavior.Cascade)
