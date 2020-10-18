@@ -29,8 +29,10 @@ namespace api
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddDbContext<ElevaContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("ElevaContext")));
+            //services.AddDbContext<ElevaContext>(options =>
+            //      options.UseSqlServer(Configuration.GetConnectionString("ElevaContext")));
+
+            services.AddDbContext<ElevaContext>(options => options.UseInMemoryDatabase("databaseEleva"));
 
         }
 

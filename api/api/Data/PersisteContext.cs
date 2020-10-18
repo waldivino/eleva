@@ -23,6 +23,7 @@ namespace TrampouApi.Context
                 escola.Property(e => e.cnpj).HasColumnName("cnpj").HasMaxLength(25);
                 escola.Property(e => e.nome).HasColumnName("nome").HasMaxLength(255);
                 escola.Property(e => e.endereco).HasColumnName("endereco").HasMaxLength(555);
+                escola.HasMany(e => e.Turmas).WithOne(t => t.escola);
 
             });
         }
@@ -35,7 +36,7 @@ namespace TrampouApi.Context
                 turma.Property(t => t.turma).HasColumnName("nm_turma").ValueGeneratedOnAdd();
                 turma.Property(t => t.periodo).HasColumnName("periodo").HasMaxLength(25);
                 turma.Property(t => t.escolaId).HasColumnName("escolaid");
-
+                turma.HasOne(e => e.escola).WithMany(t => t.Turmas);
             });
         }
 

@@ -25,10 +25,6 @@ namespace api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Escola>>> GetEscolas()
         {
-            var escolas = (from e in _context.Escolas
-                        join t in _context.Turmas on e.id equals t.id select e).ToList();
-
-            //return await _context.Escolas.ToListAsync();
             return await _context.Escolas.ToListAsync();
         }
 
@@ -91,9 +87,15 @@ namespace api.Controllers
         public async Task<ActionResult<Escola>> DeleteEscola(int id)
         {
             var escola = await _context.Escolas.FindAsync(id);
+
             if (escola == null)
             {
                 return NotFound();
+            }
+
+            if (EscolaTurmaExists(id))
+            {
+                return CreatedAtAction("DeleteEscola", null);
             }
 
             _context.Escolas.Remove(escola);
@@ -105,6 +107,11 @@ namespace api.Controllers
         private bool EscolaExists(int id)
         {
             return _context.Escolas.Any(e => e.id == id);
+        }
+
+        private bool EscolaTurmaExists(int id)
+        {
+            return _context.Turmas.Any(e => e.escolaId == id);
         }
     }
 }

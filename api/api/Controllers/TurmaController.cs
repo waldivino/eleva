@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using api.Data;
 using api.models;
+using api.models.dto;
 
 namespace api.Controllers
 {
@@ -44,8 +45,9 @@ namespace api.Controllers
 
         // PUT: api/Turma/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTurma(int id, Turma turma)
+        public async Task<IActionResult> PutTurma(int id, TurmaDTO turmaDTO)
         {
+            Turma turma = populaTurmaPut(turmaDTO);
             if (id != turma.id)
             {
                 return BadRequest();
@@ -74,12 +76,33 @@ namespace api.Controllers
 
         // POST: api/Turma
         [HttpPost]
-        public async Task<ActionResult<Turma>> PostTurma(Turma turma)
+        public async Task<ActionResult<TurmaDTO>> PostTurma(TurmaDTO turmaDTO)
         {
+            Turma turma = populaTurmaPost(turmaDTO);
+
             _context.Turmas.Add(turma);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTurma", new { id = turma.id }, turma);
+        }
+
+        private static Turma populaTurmaPut(TurmaDTO turmaDTO)
+        {
+            Turma turma = new Turma();
+            turma.id = turmaDTO.id;
+            turma.escolaId = turmaDTO.escolaId;
+            turma.turma = turmaDTO.turma;
+            turma.periodo = turmaDTO.periodo;
+            return turma;
+        }
+
+        private static Turma populaTurmaPost(TurmaDTO turmaDTO)
+        {
+            Turma turma = new Turma();
+            turma.escolaId = turmaDTO.escolaId;
+            turma.turma = turmaDTO.turma;
+            turma.periodo = turmaDTO.periodo;
+            return turma;
         }
 
         // DELETE: api/Turma/5

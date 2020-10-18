@@ -16,6 +16,7 @@ export class EscolasComponent implements OnInit {
   public escolaSelecionada: Escola;
   public escolaForm: FormGroup;
   public escolaPostForm: FormGroup;
+  public msnErro: string;
   modalRef: BsModalRef;
 
   constructor(private ec: FormBuilder, private modalService: BsModalService, private escolaService: EscolaService) {
@@ -128,7 +129,11 @@ export class EscolasComponent implements OnInit {
     this.escolaService.delete(id).subscribe(
       // tslint:disable-next-line:no-shadowed-variable
       (escola: Escola) => {
-        console.log(escola);
+        //if(escola == null){
+        //  this.msnErro = 'Existem turmas cadastradas para esta escola.';
+        //}
+        this.escolaPostForm.reset();
+        this.escolaForm.reset();
         this.carregaEscola();
       },
       (erro: any) => {

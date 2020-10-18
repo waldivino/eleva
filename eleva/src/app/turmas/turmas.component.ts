@@ -53,13 +53,15 @@ export class TurmasComponent implements OnInit {
       id: [''],
       turma: ['', Validators.required],
       periodo: ['', Validators.required],
-      escolaId: ['', Validators.required]
+      escolaId: ['', Validators.required],
+      escola: ['']
     });
 
     this.turmaPostForm = this.tc.group({
       turma: ['', Validators.required],
       periodo: ['', Validators.required],
-      escolaId: ['', Validators.required]
+      escolaId: ['', Validators.required],
+      escola: ['']
     });
   }
 
@@ -94,6 +96,7 @@ atualizaSubmit(){
 
 // tslint:disable-next-line:typedef
 deletarSubmit(){
+  this.turmaForm.value.escola = new Escola();
   this.deletarTurma(this.turmaForm.value.id);
 }
 
