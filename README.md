@@ -8,13 +8,13 @@
 
 ##Persistência de Dados:
 - Microsoft.EntityFrameworkCore.InMemory (https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.InMemory/)
--> Install-Package Microsoft.EntityFrameworkCore.InMemory -Version 3.1.9
--> Preparado para SQLServer Também.
+- Install-Package Microsoft.EntityFrameworkCore.InMemory -Version 3.1.9
+- Preparado para SQLServer Também.
 
 ##Tecnologia de serviços:
--> API .NET Core 3.0 com EF
+- API .NET Core 3.0 com EF
 
 ##Linguagem utilizada:
-->C#
+- C#
 
 
