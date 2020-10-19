@@ -8,7 +8,7 @@
 
 ##Persistência de Dados:
 - Microsoft.EntityFrameworkCore.InMemory (https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.InMemory/)
---> Install-Package Microsoft.EntityFrameworkCore.InMemory -Version 3.1.9
+-> Install-Package Microsoft.EntityFrameworkCore.InMemory -Version 3.1.9
 -> Preparado para SQLServer Também.
 
 ##Tecnologia de serviços:
