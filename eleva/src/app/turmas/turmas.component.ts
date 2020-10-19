@@ -158,6 +158,6 @@ carregaEscola(){
       console.error(erro);
     }
   );
-}
+  }
 
 }

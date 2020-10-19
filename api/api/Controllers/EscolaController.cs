@@ -23,23 +23,17 @@ namespace api.Controllers
 
         // GET: api/Escola
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Escola>>> GetEscolas()
+        public async Task<ActionResult<IEnumerable<dynamic>>> GetEscolas()
         {
             return await _context.Escolas.ToListAsync();
+
         }
 
         // GET: api/Escola/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Escola>> GetEscola(int id)
+        public async Task<ActionResult<dynamic>> GetEscola(int id)
         {
-            var escola = await _context.Escolas.FindAsync(id);
-
-            if (escola == null)
-            {
-                return NotFound();
-            }
-
-            return escola;
+            return await _context.Turmas.Where(e => e.escolaId == id).ToListAsync(); ;
         }
 
         // PUT: api/Escola/5

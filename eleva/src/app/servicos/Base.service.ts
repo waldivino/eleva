@@ -17,6 +17,10 @@ export class BaseService<TModelo> {
     return this.http.get<TModelo[]>(this.url);
   }
 
+  listarTurmasPorEscola(escolaId: number): Observable<any[]> {
+    return this.http.get<TModelo[]>(this.url + escolaId);
+  }
+
   post(tModelo: TModelo): Observable<TModelo>  {
     return this.http.post<TModelo>(this.url, tModelo);
   }

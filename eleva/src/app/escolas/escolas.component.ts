@@ -32,7 +32,7 @@ export class EscolasComponent implements OnInit {
   public escolas: Escola[];
 
     // tslint:disable-next-line:member-ordering
-    public turmas: Turma[];
+    public escolaTurmas: Turma[];
 
   // tslint:disable-next-line:typedef
   escolaSelect(escola: Escola){
@@ -44,6 +44,7 @@ export class EscolasComponent implements OnInit {
   // tslint:disable-next-line:typedef
   limpar(){
     this.escolaSelecionada = null;
+    this.msnErro = null;
   }
 
   // tslint:disable-next-line:typedef
@@ -73,6 +74,7 @@ export class EscolasComponent implements OnInit {
         console.error(erro);
       }
     );
+    this.msnErro = null;
   }
 
   // tslint:disable-next-line:typedef
@@ -105,6 +107,7 @@ export class EscolasComponent implements OnInit {
       }
     );
     this.modalRef.hide();
+    this.msnErro = null;
   }
 
   // tslint:disable-next-line:typedef
@@ -122,6 +125,7 @@ export class EscolasComponent implements OnInit {
       }
     );
     this.modalRef.hide();
+    this.msnErro = null;
   }
 
   // tslint:disable-next-line:typedef
@@ -129,12 +133,14 @@ export class EscolasComponent implements OnInit {
     this.escolaService.delete(id).subscribe(
       // tslint:disable-next-line:no-shadowed-variable
       (escola: Escola) => {
-        //if(escola == null){
-        //  this.msnErro = 'Existem turmas cadastradas para esta escola.';
-        //}
-        this.escolaPostForm.reset();
-        this.escolaForm.reset();
-        this.carregaEscola();
+        if(escola == null){
+          this.msnErro = 'Existem turmas cadastradas para esta escola.';
+        }else{
+          this.escolaPostForm.reset();
+          this.escolaForm.reset();
+          this.carregaEscola();
+          this.msnErro = null;
+        }
       },
       (erro: any) => {
         console.error(erro);
@@ -150,13 +156,14 @@ export class EscolasComponent implements OnInit {
   // tslint:disable-next-line:typedef
   carregaTurmaPorEscola(escolaID: number){
     this.escolaService.listarTurmasPorEscola(escolaID).subscribe(
-      (turmas: Turma[]) => {
-        this.turmas = turmas;
+      (eturmas: Turma[]) => {
+        this.escolaTurmas = eturmas;
       },
       (erro: any) => {
         console.error(erro);
       }
     );
+    this.msnErro = null;
   }
 
 }

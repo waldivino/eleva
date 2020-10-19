@@ -1,4 +1,18 @@
-<h2>{{titulo}}</h2>
+<div class="row">
+  <div class="container" *ngIf="msnErro">
+    <div class="alert alert-danger fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="limpar()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <p>{{msnErro}}</p>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="ng-container">
+    <h2>{{titulo}}</h2>
+  </div>
+</div>
 <div class="row form-group" style="justify-content: flex-end;">
   <button type="button" class="btn btn-primary" (click)="openModal(template)">Novo</button>
 </div>
@@ -23,7 +37,7 @@
           <td>{{escola.nome}}</td>
           <td>{{escola.endereco}}</td>
           <td>
-            <div class="btn-group"><button class="btn btn-outline-primary" (click)="openModal(turmas)" style="cursor: pointer;">Listar Turmas</button></div>
+            <div class="btn-group"><button class="btn btn-outline-primary" (click)="carregaTurmaPorEscola(escola.id)" (click)="openModal(turmas)" style="cursor: pointer;">Turmas</button></div>
             <div class="btn-group"><button class="btn btn-outline-primary" (click)="escolaSelect(escola)" (click)="openModal(atualizarEscola)" style="cursor: pointer;">Atualizar</button></div>
             <div class="btn-group"><button class="btn btn-danger" style="cursor: pointer;" (click)="escolaSelect(escola)" (click)="deletarSubmit(escola)">Excluir</button></div>
           </td>
@@ -44,7 +58,7 @@
       <form [formGroup]="escolaPostForm" (submit)="escolaSubmit()">
         <div class="form-group">
           <label for="cnpj">CNPJ</label>
-          <input type="text" formControlName="cnpj" class="form-control" id="cnpj" aria-describedby="CNPJ">
+          <input type="text" formControlName="cnpj" class="form-control" id="cnpj" mask="00.000.000/0000-00" aria-describedby="CNPJ">
         </div>
         <div class="form-group">
           <label for="nome">Nome</label>
@@ -69,23 +83,24 @@
   </div>
   <div class="modal-body">
     <div class="container">
-        <table class="table table-hover">
-          <thead class="thead-light">
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Turma</th>
-              <th scope="col">Período</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let turma of turmas">
-              <th scope="row">{{turma.id}}</th>
-              <td>{{turma.turma}}</td>
-              <td>{{turma.periodo}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <table class="table table-hover">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">ID Escola</th>
+            <th scope="col">Turma</th>
+            <th scope="col">Período</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let eturma of escolaTurmas">
+            <th scope="row">{{eturma.id}}</th>
+            <th scope="row">{{eturma.escolaId}}</th>
+            <td>{{eturma.turma}}</td>
+            <td>{{eturma.periodo}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </ng-template>
@@ -106,7 +121,7 @@
       </div>
       <div class="form-group">
         <label for="cnpj">CNPJ</label>
-        <input type="text" formControlName="cnpj" class="form-control" id="cnpj" aria-describedby="CNPJ">
+        <input type="text" formControlName="cnpj" class="form-control" id="cnpj" mask="00.000.000/0000-00" aria-describedby="CNPJ">
       </div>
       <div class="form-group">
         <label for="nome">Nome</label>
@@ -121,3 +136,6 @@
   </div>
   </div>
 </ng-template>
+
+
+
